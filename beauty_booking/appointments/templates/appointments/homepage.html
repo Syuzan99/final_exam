@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Beauty Booking</title>
+</head>
+<body style="background-color:rgb(255, 217, 216);">
+    <header>
+        <h1><a href="{% url 'homepage' %}">Beauty Booking</a></h1>
+        <nav>
+            <a href="{% url 'register' %}">Register</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+            <a href="{% url 'terms_of_service' %}">Terms of Service</a>
+            <a href="{% url 'contact_support' %}">Contact Support</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Available Specialists</h1>
+        <ul>
+            {% for specialist in specialists %}
+            <li>
+                <a href="{% url 'specialist_profile' specialist.id %}">
+                    <img src="{{ specialist.photo.url }}" alt="{{ specialist.user.username }}">
+                    <h2>{{ specialist.user.username }}</h2>
+                    <p>Rating: {{ specialist.rating }}</p>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>

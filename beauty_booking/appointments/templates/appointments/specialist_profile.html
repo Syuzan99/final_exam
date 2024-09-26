@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ specialist.user.username }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .calendar {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ specialist.user.username }}</h1>
+    <img src="{{ specialist.photo.url }}" alt="{{ specialist.user.username }}">
+    <p>Rating: {{ specialist.rating }}</p>
+
+    <h2>Book an Appointment</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="date">Select Date:</label>
+        <input type="text" id="datepicker" name="date" required>
+
+        <label for="time">Select Time:</label>
+        <select name="time" id="time" required>
+            <option value="09:00">09:00 AM</option>
+            <option value="10:00">10:00 AM</option>
+            <option value="11:00">11:00 AM</option>
+            <option value="12:00">12:00 PM</option>
+            <option value="13:00">01:00 PM</option>
+            <option value="14:00">02:00 PM</option>
+            <option value="15:00">03:00 PM</option>
+            <option value="16:00">04:00 PM</option>
+            <option value="17:00">05:00 PM</option>
+        </select>
+
+        <button type="submit">Book Appointment</button>
+    </form>
+
+    <script>
+        $(function() {
+            $("#datepicker").datepicker({
+                minDate: 0, // Prevent selection of past dates
+                dateFormat: 'yy-mm-dd' // Format for backend compatibility
+            });
+        });
+    </script>
+</body>
+</html>
+
